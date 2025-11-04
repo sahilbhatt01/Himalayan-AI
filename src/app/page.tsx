@@ -1,65 +1,202 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { motion } from "framer-motion";
+import Hero3D from "@/components/Hero3D";
+import ThreeCanvas from "@/components/ThreeCanvas";
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen w-full bg-[#030a1a] text-white overflow-hidden">
+      {/* ===== Hero 3D Section ===== */}
+      <Hero3D />
+
+      {/* ===== About Section ===== */}
+      <section className="relative z-10 py-20 px-6 md:px-16 bg-gradient-to-b from-[#030a1a] via-[#08142b] to-[#0a1e3a]">
+        <motion.div
+          className="max-w-6xl mx-auto text-center"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            Learn, Create, and Innovate
+          </h2>
+          <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-12">
+            Himalayan AI Code School empowers learners to explore Artificial
+            Intelligence, 3D Design, and modern web technologies through
+            interactive, project-based learning. Whether you're a beginner or an
+            advanced developer, our courses help you turn ideas into intelligent
+            applications that come alive in 3D environments.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        </motion.div>
+
+        {/* 3D Canvas */}
+        <motion.div
+          className="max-w-5xl mx-auto mt-10"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <ThreeCanvas />
+        </motion.div>
+      </section>
+
+      {/* ===== Programs Section ===== */}
+      <section className="relative py-24 bg-[#020b18] px-6 md:px-16">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.h2
+            className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-400 bg-clip-text text-transparent mb-8"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Our Curriculum
+          </motion.h2>
+
+          <motion.div
+            className="grid md:grid-cols-3 gap-6"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            viewport={{ once: true }}
           >
-            Documentation
-          </a>
+            {[
+              {
+                title: "AI Fundamentals",
+                desc: "Learn machine learning, neural networks, and data visualization using real-world datasets.",
+              },
+              {
+                title: "3D Web Development",
+                desc: "Build immersive 3D web experiences using Three.js, React Three Fiber, and advanced shaders.",
+              },
+              {
+                title: "Full-Stack Projects",
+                desc: "Develop end-to-end applications using Next.js, Tailwind CSS, and Prisma with PostgreSQL.",
+              },
+            ].map((card, i) => (
+              <div
+                key={i}
+                className="p-8 bg-[#0b1630]/60 border border-blue-900 rounded-2xl shadow-lg hover:shadow-blue-600/30 transition-all duration-300"
+              >
+                <h3 className="text-2xl font-semibold text-cyan-400 mb-3">
+                  {card.title}
+                </h3>
+                <p className="text-gray-300">{card.desc}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ===== Why Choose Us ===== */}
+      <section className="relative py-24 bg-gradient-to-b from-[#0a1e3a] to-[#051024] px-6 md:px-16">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+              Why Choose Himalayan AI Code School?
+            </h2>
+            <ul className="space-y-4 text-gray-300 text-lg">
+              <li>✅ Live project-based learning from day one</li>
+              <li>✅ Mentorship from real developers & AI engineers</li>
+              <li>
+                ✅ Modern tools: Next.js 14, Prisma, Three.js, and OpenAI APIs
+              </li>
+              <li>✅ Build your portfolio with 3D & AI-powered projects</li>
+              <li>✅ Career guidance & community-driven collaboration</li>
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <div className="w-full h-[400px]">
+              <ThreeCanvas />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== Student Projects ===== */}
+      <section className="relative py-24 bg-[#030a1a] px-6 md:px-16">
+        <motion.div
+          className="max-w-6xl mx-auto text-center"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-300 bg-clip-text text-transparent mb-8">
+            Student Projects
+          </h2>
+          <p className="text-gray-400 max-w-3xl mx-auto mb-12">
+            Our learners build interactive AI tools, 3D visualizations, and
+            full-stack applications that showcase innovation and creativity.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "AI Image Generator",
+                desc: "Built with OpenAI API & Next.js for generating art through prompts.",
+              },
+              {
+                title: "3D Portfolio Site",
+                desc: "An immersive portfolio using React Three Fiber & motion animations.",
+              },
+              {
+                title: "AI Chat Assistant",
+                desc: "A chatbot trained on real datasets with context-aware replies.",
+              },
+            ].map((p, i) => (
+              <motion.div
+                key={i}
+                className="bg-[#0b1630]/50 border border-blue-800 p-6 rounded-2xl shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+              >
+                <h3 className="text-xl font-semibold text-cyan-300 mb-2">
+                  {p.title}
+                </h3>
+                <p className="text-gray-400">{p.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ===== CTA Section ===== */}
+      <section className="relative py-24 bg-gradient-to-r from-[#0a1e3a] via-[#08142b] to-[#030a1a] text-center px-6">
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-6"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          Join the Himalayan AI Revolution
+        </motion.h2>
+        <p className="text-gray-300 max-w-3xl mx-auto mb-10 text-lg">
+          Start your journey into AI, 3D, and modern web development with
+          expert-led learning paths and hands-on experience.
+        </p>
+        <motion.a
+          href="/join"
+          whileHover={{ scale: 1.05 }}
+          className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-semibold shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+        >
+          Enroll Now
+        </motion.a>
+      </section>
+    </main>
   );
 }

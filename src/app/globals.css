@@ -1,4 +1,20 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* small base reset for readable typography */
+html,
+body,
+#__next {
+  height: 100%;
+}
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #07102a 0%, #0b1220 100%);
+  color: #e6eef8;
+}
 
 :root {
   --background: #ffffff;
