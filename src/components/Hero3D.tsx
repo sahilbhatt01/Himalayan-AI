@@ -6,71 +6,52 @@ import { Suspense } from 'react';
 
 export default function Hero3D() {
   return (
-    <section className="relative w-full h-[80vh] flex items-center justify-center">
+    <section className="relative w-full h-[80vh] bg-[#030a1a] flex items-center justify-center overflow-hidden">
       <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
         {/* Lights */}
         <ambientLight intensity={0.6} />
         <directionalLight position={[2, 3, 5]} intensity={1.2} />
 
-        {/* Background Stars */}
-        <Stars radius={100} depth={50} count={4000} factor={4} fade />
+        {/* Starfield / Nebula Feel */}
+        <Stars radius={200} depth={80} count={8000} factor={6} fade />
+        <fog attach="fog" args={['#030a1a', 6, 18]} />
 
-        {/* Floating Elements */}
         <Suspense fallback={null}>
-          <Float
-            speed={2}
-            rotationIntensity={1}
-            floatIntensity={1.5}
-          >
-            <mesh>
+
+          {/* LEFT Floating Icosahedron */}
+          <Float speed={2} rotationIntensity={1.2} floatIntensity={1.5}>
+            <mesh position={[-4.5, 0.3, 0]}>
               <icosahedronGeometry args={[1.3, 1]} />
               <meshStandardMaterial
                 color="#00ffff"
                 emissive="#00ffff"
+                emissiveIntensity={0.6}
+                wireframe
+              />
+            </mesh>
+          </Float>
+
+          {/* RIGHT Floating Dodecahedron */}
+          <Float speed={2.2} rotationIntensity={1.8} floatIntensity={2.3}>
+            <mesh position={[4.5, -0.2, 0]}>
+              <dodecahedronGeometry args={[1.0, 0]} />
+              <meshStandardMaterial
+                color="#00ffcc"
+                emissive="#00ffcc"
                 emissiveIntensity={0.5}
                 wireframe
               />
             </mesh>
           </Float>
 
-          <Float
-            speed={1.5}
-            rotationIntensity={2}
-            floatIntensity={2}
-          >
-            <mesh position={[2.5, -1.5, -1]}>
-              <torusKnotGeometry args={[0.6, 0.2, 128, 32]} />
-              <meshStandardMaterial
-                color="#ff00ff"
-                emissive="#ff00ff"
-                emissiveIntensity={0.4}
-                wireframe
-              />
-            </mesh>
-          </Float>
-
-          <Float
-            speed={1.8}
-            rotationIntensity={1.5}
-            floatIntensity={2.5}
-          >
-            <mesh position={[-2.2, 1.5, 0]}>
-              <dodecahedronGeometry args={[0.8, 0]} />
-              <meshStandardMaterial
-                color="#00ffcc"
-                emissive="#00ffcc"
-                emissiveIntensity={0.4}
-                wireframe
-              />
-            </mesh>
-          </Float>
         </Suspense>
 
+        {/* Camera Controls */}
         <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>
 
-      {/* Hero Text Overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+      {/* Text Overlay */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
         <h1 className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
           Himalayan AI Code School
         </h1>

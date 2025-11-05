@@ -1,7 +1,23 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import SceneOrb from '@/components/SceneOrb';
+import { motion } from "framer-motion";
+import SceneOrb from "@/components/SceneOrb";
+import InfoCard from "@/components/InfoCard"; 
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.6 } },
+};
+
+const staggerParent = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.25 } },
+};
 
 export default function AboutPage() {
   return (
@@ -10,8 +26,9 @@ export default function AboutPage() {
         {/* ====== Title ====== */}
         <motion.h1
           className="text-5xl md:text-7xl font-bold text-center bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent mb-10"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
         >
           About Us
         </motion.h1>
@@ -19,8 +36,9 @@ export default function AboutPage() {
         {/* ====== Intro Paragraph ====== */}
         <motion.p
           className="text-gray-300 text-lg max-w-4xl mx-auto text-center leading-relaxed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          variants={fadeIn}
+          initial="hidden"
+          animate="show"
           transition={{ delay: 0.3 }}
         >
           <strong>Himalayan AI Code School</strong> is an immersive learning hub
@@ -29,86 +47,84 @@ export default function AboutPage() {
           empower learners to build real-world solutions that shape the future.
         </motion.p>
 
+        <motion.div
+          className="mt-16 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"
+          initial={{ width: 0 }}
+          whileInView={{ width: "100%" }}
+          transition={{ duration: 1 }}
+        />
+
         {/* ====== Mission Section ====== */}
         <motion.div
           className="mt-16 max-w-5xl mx-auto text-center"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
         >
           <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-cyan-400">
             Our Mission
           </h2>
           <p className="text-gray-400 text-lg leading-relaxed">
-            Our mission is to make high-quality AI and software education accessible
-            to everyone, regardless of location or background. We focus on 
-            <span className="text-white"> practical learning, mentorship, and innovation</span> —
-            guiding learners from the basics of programming to advanced fields like
-            machine learning, web development, and creative coding.
+            Our mission is to make high-quality AI and software education
+            accessible to everyone, regardless of location or background. We
+            focus on
+            <span className="text-white"> practical learning, mentorship, and innovation </span>
+            — guiding learners from the basics of programming to advanced fields
+            like machine learning, web development, and creative coding.
           </p>
         </motion.div>
 
-        {/* ====== What We Offer ====== */}
+        {/* ====== What We Offer (REPLACED WITH InfoCard) ====== */}
         <motion.div
-          className="mt-20 grid md:grid-cols-3 gap-10 max-w-6xl mx-auto text-center"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
+          className="mt-20 grid md:grid-cols-3 gap-10 max-w-6xl mx-auto"
+          variants={staggerParent}
+          initial="hidden"
+          whileInView="show"
         >
-          <div className="bg-white/5 p-8 rounded-2xl backdrop-blur-lg hover:bg-white/10 transition-all">
-            <h3 className="text-xl font-semibold text-cyan-300 mb-3">
-              Hands-on Learning
-            </h3>
-            <p className="text-gray-400">
-              Build real-world projects guided by mentors and industry experts.
-              Learn by doing — from coding your first AI model to deploying modern
-              web apps.
-            </p>
-          </div>
-
-          <div className="bg-white/5 p-8 rounded-2xl backdrop-blur-lg hover:bg-white/10 transition-all">
-            <h3 className="text-xl font-semibold text-blue-400 mb-3">
-              Mentorship & Guidance
-            </h3>
-            <p className="text-gray-400">
-              Learn directly from professionals who’ve built real AI and tech
-              products. Get one-on-one mentorship and career guidance every step
-              of the way.
-            </p>
-          </div>
-
-          <div className="bg-white/5 p-8 rounded-2xl backdrop-blur-lg hover:bg-white/10 transition-all">
-            <h3 className="text-xl font-semibold text-purple-400 mb-3">
-              Global Community
-            </h3>
-            <p className="text-gray-400">
-              Join a thriving global network of creators, coders, and innovators
-              passionate about technology, design, and positive impact.
-            </p>
-          </div>
+          {[
+            {
+              title: "Hands-on Learning",
+              gradient: "from-cyan-500 via-blue-500 to-purple-500",
+              text: "Build real-world projects guided by mentors and industry experts. Learn by doing — from coding your first AI model to deploying modern web apps.",
+            },
+            {
+              title: "Mentorship & Guidance",
+              gradient: "from-blue-500 via-purple-500 to-pink-500",
+              text: "Learn directly from professionals who’ve built real AI and tech products. Get one-on-one mentorship and career guidance every step of the way.",
+            },
+            {
+              title: "Global Community",
+              gradient: "from-purple-500 via-pink-500 to-red-500",
+              text: "Join a thriving global network of creators, coders, and innovators passionate about technology, design, and positive impact.",
+            },
+          ].map((item, i) => (
+            <motion.div key={i} variants={fadeUp}>
+              <InfoCard title={item.title} text={item.text} gradient={item.gradient} />
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* ====== 3D Scene / Orb Section ====== */}
-        <div className="mt-24 max-w-4xl mx-auto">
+        {/* ====== 3D Scene ====== */}
+        <motion.div className="mt-24 max-w-4xl mx-auto">
           <SceneOrb />
-        </div>
+        </motion.div>
 
         {/* ====== Vision Section ====== */}
         <motion.div
           className="mt-24 max-w-4xl mx-auto text-center mb-16"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
         >
           <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-purple-400">
             Our Vision
           </h2>
           <p className="text-gray-400 text-lg leading-relaxed">
             We envision a world where learning is limitless — where anyone can
-            create intelligent systems, immersive 3D experiences, and
-            meaningful technology that solves real problems. <br /> At Himalayan
-            AI Code School, we’re building the bridge between creativity and
-            code, imagination and innovation.
+            create intelligent systems, immersive 3D experiences, and meaningful
+            technology that solves real problems. <br /> At Himalayan AI Code
+            School, we’re building the bridge between creativity and code,
+            imagination and innovation.
           </p>
         </motion.div>
       </section>

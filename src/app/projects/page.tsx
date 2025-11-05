@@ -36,7 +36,6 @@ export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-[#030a1a] text-white overflow-hidden">
       <section className="pt-28 px-6 md:px-16 text-center">
-        {/* ====== Page Title ====== */}
         <motion.h1
           className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-400 bg-clip-text text-transparent mb-10"
           initial={{ opacity: 0, y: 40 }}
@@ -65,39 +64,69 @@ export default function ProjectsPage() {
           {projects.map((p, i) => (
             <motion.div
               key={i}
-              className="bg-[#0b1630]/60 border border-blue-900 p-8 rounded-2xl hover:shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-2"
+              className="relative p-[2px] rounded-2xl group cursor-pointer"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2 }}
+              whileHover={{
+                scale: 1.05,
+                rotateX: 6,
+                rotateY: -6,
+                transition: { type: "spring", stiffness: 180, damping: 12 },
+              }}
             >
-              <h3 className="text-2xl text-cyan-400 font-semibold mb-3">
-                {p.name}
-              </h3>
-              <p className="text-gray-300 text-base mb-4 leading-relaxed">
-                {p.desc}
-              </p>
-              <div className="flex flex-wrap justify-center gap-2 mt-3">
-                {p.tech.map((t, index) => (
-                  <span
-                    key={index}
-                    className="text-sm bg-blue-900/40 px-3 py-1 rounded-full border border-blue-800 text-blue-300"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
+              {/* Animated Glow Border */}
+              <motion.div
+                animate={{
+                  opacity: [0.2, 0.8, 0.2],
+                  scale: [1, 1.04, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                }}
+                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-600 to-cyan-400 opacity-0 group-hover:opacity-100 blur-xl transition duration-700"
+              />
+
+              {/* Card Content */}
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }}
+                className="relative bg-[#0b163070] backdrop-blur-md border border-blue-900 p-8 rounded-2xl group-hover:scale-[1.03] hover:shadow-blue-500/40 hover:shadow-2xl transition-all duration-500"
+              >
+                <h3 className="text-2xl text-cyan-400 font-semibold mb-3">
+                  {p.name}
+                </h3>
+                <p className="text-gray-300 text-base mb-4 leading-relaxed">
+                  {p.desc}
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-3">
+                  {p.tech.map((t, index) => (
+                    <span
+                      key={index}
+                      className="text-sm bg-blue-900/40 px-3 py-1 rounded-full border border-blue-800 text-blue-300"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
 
-        {/* ====== Scene Orb (3D element) ======
-        <div className="mt-24 max-w-4xl mx-auto">
-          <SceneOrb />
-        </div> */}
+        {/* Divider Glow */}
+        <div className="my-28 w-full h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-60"></div>
 
-        {/* ====== Upcoming Projects Section ====== */}
+        {/* ====== Upcoming Projects ====== */}
         <motion.div
-          className="mt-28 max-w-5xl mx-auto text-center"
+          className="max-w-5xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
@@ -114,7 +143,7 @@ export default function ProjectsPage() {
             {upcoming.map((p, i) => (
               <motion.div
                 key={i}
-                className="bg-[#101a3b]/60 border border-purple-800 p-8 rounded-2xl hover:bg-[#181f40]/80 transition"
+                className="bg-[#101a3b]/60 backdrop-blur-md border border-purple-800 p-8 rounded-2xl hover:scale-[1.03] hover:bg-[#1a224b]/80 transition-all duration-400"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.2 }}
@@ -128,7 +157,7 @@ export default function ProjectsPage() {
           </div>
         </motion.div>
 
-        {/* ====== Closing Section ====== */}
+        {/* Closing Section */}
         <motion.div
           className="mt-28 max-w-3xl mx-auto text-center mb-16"
           initial={{ opacity: 0, y: 40 }}

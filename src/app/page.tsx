@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Hero3D from "@/components/Hero3D";
 import ThreeCanvas from "@/components/ThreeCanvas";
+import InfoCard from "@/components/InfoCard"; // ✅ NEW IMPORT
 
 export default function HomePage() {
   return (
@@ -67,25 +68,25 @@ export default function HomePage() {
               {
                 title: "AI Fundamentals",
                 desc: "Learn machine learning, neural networks, and data visualization using real-world datasets.",
+                gradient: "from-cyan-400 via-blue-500 to-indigo-500",
               },
               {
                 title: "3D Web Development",
                 desc: "Build immersive 3D web experiences using Three.js, React Three Fiber, and advanced shaders.",
+                gradient: "from-blue-400 via-purple-500 to-pink-500",
               },
               {
                 title: "Full-Stack Projects",
                 desc: "Develop end-to-end applications using Next.js, Tailwind CSS, and Prisma with PostgreSQL.",
+                gradient: "from-purple-400 via-pink-500 to-red-400",
               },
             ].map((card, i) => (
-              <div
+              <InfoCard
                 key={i}
-                className="p-8 bg-[#0b1630]/60 border border-blue-900 rounded-2xl shadow-lg hover:shadow-blue-600/30 transition-all duration-300"
-              >
-                <h3 className="text-2xl font-semibold text-cyan-400 mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-gray-300">{card.desc}</p>
-              </div>
+                title={card.title}
+                text={card.desc}
+                gradient={card.gradient}
+              />
             ))}
           </motion.div>
         </div>
@@ -149,26 +150,20 @@ export default function HomePage() {
               {
                 title: "AI Image Generator",
                 desc: "Built with OpenAI API & Next.js for generating art through prompts.",
+                gradient: "from-cyan-400 to-blue-500",
               },
               {
                 title: "3D Portfolio Site",
                 desc: "An immersive portfolio using React Three Fiber & motion animations.",
+                gradient: "from-purple-400 to-pink-500",
               },
               {
                 title: "AI Chat Assistant",
                 desc: "A chatbot trained on real datasets with context-aware replies.",
+                gradient: "from-teal-400 to-green-400",
               },
             ].map((p, i) => (
-              <motion.div
-                key={i}
-                className="bg-[#0b1630]/50 border border-blue-800 p-6 rounded-2xl shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-              >
-                <h3 className="text-xl font-semibold text-cyan-300 mb-2">
-                  {p.title}
-                </h3>
-                <p className="text-gray-400">{p.desc}</p>
-              </motion.div>
+              <InfoCard key={i} title={p.title} text={p.desc} gradient={p.gradient} />
             ))}
           </div>
         </motion.div>
