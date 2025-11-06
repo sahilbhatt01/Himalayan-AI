@@ -1,6 +1,7 @@
 "use client";
 
-import InfoCard from "@/components/InfoCard"; // ✅ Import new card
+import { useState } from "react";
+import InfoCard from "@/components/InfoCard";
 import { motion } from "framer-motion";
 
 const fadeUp = {
@@ -14,10 +15,51 @@ const staggerParent = {
 };
 
 export default function JoinPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    program: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to submit");
+
+      setSuccess(true);
+      setFormData({ name: "", email: "", phone: "", program: "", message: "" });
+    } catch (err: any) {
+      console.error("Form submit error:", err.message);
+      setErrorMsg(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="relative min-h-screen bg-[#030a1a] text-white overflow-hidden">
       <section className="pt-28 px-6 md:px-16 text-center">
-        {/* ===== Title ===== */}
         <motion.h1
           variants={fadeUp}
           initial="hidden"
@@ -27,7 +69,6 @@ export default function JoinPage() {
           Join the Himalayan AI Family
         </motion.h1>
 
-        {/* ===== Subtitle ===== */}
         <motion.p
           variants={fadeUp}
           initial="hidden"
@@ -39,7 +80,6 @@ export default function JoinPage() {
           Intelligence, 3D Web Experiences, and Creative Coding.
         </motion.p>
 
-        {/* ===== Reusable Cards Section ===== */}
         <motion.div
           variants={staggerParent}
           initial="hidden"
@@ -74,7 +114,6 @@ export default function JoinPage() {
           ))}
         </motion.div>
 
-        {/* ===== Application Form ===== */}
         <motion.div
           variants={fadeUp}
           whileInView="show"
@@ -85,26 +124,48 @@ export default function JoinPage() {
             Apply Now
           </h2>
 
+          {success && (
+            <p className="text-green-400 mb-4 text-center">
+              Application submitted successfully!
+            </p>
+          )}
+
+          {errorMsg && (
+            <p className="text-red-400 mb-4 text-center">{errorMsg}</p>
+          )}
+
           <motion.form
             className="space-y-5"
+            onSubmit={handleSubmit}
             initial="hidden"
             animate="show"
             variants={staggerParent}
           >
             <motion.input
               variants={fadeUp}
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
               type="text"
               placeholder="Full Name"
               className="w-full p-3 bg-[#0b1630] rounded-lg border border-gray-700 focus:border-cyan-400"
+              required
             />
             <motion.input
               variants={fadeUp}
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               type="email"
               placeholder="Email Address"
               className="w-full p-3 bg-[#0b1630] rounded-lg border border-gray-700 focus:border-cyan-400"
+              required
             />
             <motion.input
               variants={fadeUp}
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
               type="text"
               placeholder="Phone Number (optional)"
               className="w-full p-3 bg-[#0b1630] rounded-lg border border-gray-700 focus:border-cyan-400"
@@ -112,34 +173,42 @@ export default function JoinPage() {
 
             <motion.select
               variants={fadeUp}
+              name="program"
+              value={formData.program}
+              onChange={handleChange}
               className="w-full p-3 bg-[#0b1630] rounded-lg border border-gray-700 focus:border-cyan-400"
+              required
             >
-              <option>Choose Program</option>
-              <option>AI Development</option>
-              <option>3D Web Design</option>
-              <option>Full-Stack Projects</option>
-              <option>Creative Coding</option>
+              <option value="">Choose Program</option>
+              <option value="AI Development">AI Development</option>
+              <option value="3D Web Design">3D Web Design</option>
+              <option value="Full-Stack Projects">Full-Stack Projects</option>
+              <option value="Creative Coding">Creative Coding</option>
             </motion.select>
 
             <motion.textarea
               variants={fadeUp}
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Tell us why you want to join..."
               rows={4}
               className="w-full p-3 bg-[#0b1630] rounded-lg border border-gray-700 focus:border-cyan-400"
+              required
             />
 
             <motion.button
               variants={fadeUp}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 py-3 rounded-lg font-semibold"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 py-3 rounded-lg font-semibold disabled:opacity-50"
             >
-              Submit Application
+              {loading ? "Submitting..." : "Submit Application"}
             </motion.button>
           </motion.form>
         </motion.div>
 
-        {/* ===== Closing ===== */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
