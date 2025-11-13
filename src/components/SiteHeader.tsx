@@ -10,6 +10,7 @@ export default function SiteHeader() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects" },
+    { name: "RoadMap", href: "/roadmap" },
     { name: "About", href: "/about" },
   ];
 
