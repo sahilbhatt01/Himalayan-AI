@@ -58,12 +58,12 @@ export default function InfoCard({
           repeatType: "mirror",
           ease: "easeInOut",
         }}
-        className="relative bg-[#0b1630]/80 backdrop-blur-xl border border-white/10 group-hover:border-white/30 rounded-2xl p-6 transition-all duration-500"
+        className="relative flex flex-col justify-between gap-3 bg-[#0b1630]/80 backdrop-blur-xl border border-white/10 group-hover:border-white/30 rounded-2xl p-6 transition-all duration-500"
       >
-        <h3 className="text-xl font-semibold text-white group-hover:text-cyan-200 transition-all duration-300">
+        <h3 className="text-xl text-cyan-400 font-semibold group-hover:text-cyan-200 transition-all duration-300">
           {title}
         </h3>
-        <p className="text-gray-400 mt-2 group-hover:text-gray-300 transition-colors duration-300">
+        <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300 md:h-[96px] lg:h-[100px] overflow-y-auto">
           {text}
         </p>
       </motion.div>

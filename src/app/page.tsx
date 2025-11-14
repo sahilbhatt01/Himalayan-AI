@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Hero3D from "@/components/Hero3D";
-import ThreeCanvas from "@/components/ThreeCanvas";
-import InfoCard from "@/components/InfoCard"; // ✅ NEW IMPORT
+import Hero3D from "@/components/Ui/Hero3D";
+import ThreeCanvas from "@/components/Ui/ThreeCanvas";
+import InfoCard from "@/components/Card/InfoCard"; // ✅ NEW IMPORT
 
 export default function HomePage() {
   return (
@@ -24,7 +24,7 @@ export default function HomePage() {
             Learn, Create, and Innovate
           </h2>
           <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-12">
-            Himalayan AI Code School empowers learners to explore Artificial
+           <span className="text-cyan-400 font-semibold">Himalayan AI Code School</span> empowers learners to explore Artificial
             Intelligence, 3D Design, and modern web technologies through
             interactive, project-based learning. Whether you're a beginner or an
             advanced developer, our courses help you turn ideas into intelligent
@@ -58,7 +58,7 @@ export default function HomePage() {
           </motion.h2>
 
           <motion.div
-            className="grid md:grid-cols-3 gap-6"
+            className="grid lg:grid-cols-3 md:grid-cols-2 gap-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
@@ -145,7 +145,7 @@ export default function HomePage() {
             full-stack applications that showcase innovation and creativity.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
             {[
               {
                 title: "AI Image Generator",

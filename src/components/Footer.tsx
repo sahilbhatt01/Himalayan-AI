@@ -30,8 +30,9 @@ export default function Footer() {
         {/* Primary Navigation */}
         <nav className="flex flex-wrap justify-center gap-10 text-gray-300 text-lg mb-10">
           {[
-            { name: "About", href: "/about" },
+            { name: "RoadMap", href: "/roadmap" },
             { name: "Projects", href: "/projects" },
+            { name: "About", href: "/about" },
             { name: "Join Now", href: "/join" },
           ].map((link, index) => (
             <motion.div

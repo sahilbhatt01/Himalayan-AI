@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import SceneOrb from "@/components/SceneOrb";
-import InfoCard from "@/components/InfoCard"; 
+import SceneOrb from "@/components/Ui/SceneOrb";
+import InfoCard from "@/components/Card/InfoCard"; 
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -41,7 +41,7 @@ export default function AboutPage() {
           animate="show"
           transition={{ delay: 0.3 }}
         >
-          <strong>Himalayan AI Code School</strong> is an immersive learning hub
+          <span className="text-cyan-400 font-semibold">Himalayan AI Code School</span> is an immersive learning hub
           designed to train the next generation of AI innovators and creative
           developers. We combine technology, design, and hands-on projects to
           empower learners to build real-world solutions that shape the future.
@@ -68,7 +68,7 @@ export default function AboutPage() {
             Our mission is to make high-quality AI and software education
             accessible to everyone, regardless of location or background. We
             focus on
-            <span className="text-white"> practical learning, mentorship, and innovation </span>
+            <span className="text-cyan-400 font-semibold"> practical learning, mentorship, and innovation </span>
             — guiding learners from the basics of programming to advanced fields
             like machine learning, web development, and creative coding.
           </p>
@@ -76,7 +76,7 @@ export default function AboutPage() {
 
         {/* ====== What We Offer (REPLACED WITH InfoCard) ====== */}
         <motion.div
-          className="mt-20 grid md:grid-cols-3 gap-10 max-w-6xl mx-auto"
+          className="mt-20 grid lg:grid-cols-3 md:grid-cols-2 gap-10 max-w-6xl mx-auto "
           variants={staggerParent}
           initial="hidden"
           whileInView="show"
@@ -98,7 +98,7 @@ export default function AboutPage() {
               text: "Join a thriving global network of creators, coders, and innovators passionate about technology, design, and positive impact.",
             },
           ].map((item, i) => (
-            <motion.div key={i} variants={fadeUp}>
+            <motion.div key={i} variants={fadeUp} className="text-center">
               <InfoCard title={item.title} text={item.text} gradient={item.gradient} />
             </motion.div>
           ))}

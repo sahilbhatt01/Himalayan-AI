@@ -1,5 +1,5 @@
 import "./globals.css";
-import SiteHeader from "../components/SiteHeader";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export const metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-[#030a1a] text-white overflow-x-hidden">
         {/* Fixed Header */}
-        <SiteHeader />
+        <Header />
 
         {/* Full-width content (no container white margins) */}
         <main className="w-full min-h-screen pt-15">

@@ -4,13 +4,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function SiteHeader() {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Projects", href: "/projects" },
     { name: "RoadMap", href: "/roadmap" },
+    { name: "Projects", href: "/projects" },
     { name: "About", href: "/about" },
   ];
 

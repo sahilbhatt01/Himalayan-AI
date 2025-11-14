@@ -60,7 +60,7 @@ export default function ProjectsPage() {
           </motion.p>
 
           {/* ====== Current Projects ====== */}
-          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-8">
             {projects.map((p, i) => (
               <motion.div
                 key={i}
@@ -173,7 +173,7 @@ export default function ProjectsPage() {
             </h2>
             <p className="text-gray-400 text-lg leading-relaxed">
               Every project we create reflects our belief in{" "}
-              <span className="text-white">learning through innovation</span>.
+              <span className="text-cyan-400">learning through innovation</span>.
               Whether it’s AI, 3D, or full-stack — we code with creativity and
               purpose. Join us as we continue shaping the future of intelligent,
               interactive, and inspiring technology.
